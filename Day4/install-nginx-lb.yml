@@ -1,0 +1,12 @@
+- name: This playbook will install, configure nginx as a Load balancer
+  hosts: gateway
+  become: yes
+  tasks: 
+   - name: Install nginx Web server
+     apt: name=nginx state=latest update-cache=yes
+
+   - name: Configure nginx web root folder
+     copy: src=default-lb dest=/etc/nginx/nginx.conf
+
+   - name: Restart the nginx web Server
+     command: service nginx restart     
